@@ -38,7 +38,7 @@ Sin `.env` el sitio funciona en **modo demo**: la agenda muestra turnos de ejemp
 Cualquier hosting estático sirve (Vercel, Netlify, Cloudflare Pages):
 
 - Comando de build: `npm run build` · carpeta de salida: `dist`
-- Variables de entorno: `PUBLIC_SUPABASE_URL` y `PUBLIC_SUPABASE_ANON_KEY`
+- Variables de entorno: `SUPABASE_URL` y `SUPABASE_ANON_KEY`
 
 ## Uso del panel
 

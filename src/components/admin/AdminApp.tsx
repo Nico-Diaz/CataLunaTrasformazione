@@ -209,8 +209,8 @@ function SinConfigurar() {
       <div className="acceso__caja acceso__caja--ancha">
         <h1>Falta conectar Supabase</h1>
         <p>
-          El panel necesita la base de datos. Creá el archivo <code>.env</code> con <code>PUBLIC_SUPABASE_URL</code> y{' '}
-          <code>PUBLIC_SUPABASE_ANON_KEY</code> (ver <code>README.md</code>) y volvé a publicar el sitio.
+          El panel necesita la base de datos. Creá el archivo <code>.env</code> con <code>SUPABASE_URL</code> y{' '}
+          <code>SUPABASE_ANON_KEY</code> (ver <code>README.md</code>) y volvé a publicar el sitio.
         </p>
         <a className="btn btn--linea" href="/">Volver a la web</a>
       </div>

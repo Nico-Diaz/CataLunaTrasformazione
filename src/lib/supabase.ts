@@ -1,8 +1,8 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 // Acepta la URL con o sin "/rest/v1/" al final (el panel de Supabase muestra ambas).
-const url = (import.meta.env.PUBLIC_SUPABASE_URL as string | undefined)?.trim().replace(/\/(rest\/v1\/?)?$/, '');
-const anonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
+const url = (import.meta.env.SUPABASE_URL as string | undefined)?.trim().replace(/\/(rest\/v1\/?)?$/, '');
+const anonKey = import.meta.env.SUPABASE_ANON_KEY as string | undefined;
 
 /**
  * Cliente de Supabase. Es `null` mientras no estén cargadas las variables de entorno:
