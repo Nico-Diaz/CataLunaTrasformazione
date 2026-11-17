@@ -1,0 +1,58 @@
+---
+import { condiciones } from '../data/sitio';
+---
+
+<section id="condiciones" class="seccion seccion--clara" aria-labelledby="condiciones-titulo">
+  <div class="container">
+    <header class="seccion-head">
+      <p class="label" data-aparece>Condiciones</p>
+      <h2 id="condiciones-titulo" data-titulo>Las reglas, claras desde el principio.</h2>
+      <p data-aparece>Son las mismas que figuran en el presupuesto que firmamos al empezar.</p>
+    </header>
+
+    <dl class="condiciones">
+      {
+        condiciones.map((c) => (
+          <div class="condicion" data-aparece>
+            <dt>{c.titulo}</dt>
+            <dd>{c.texto}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .condiciones {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    background: var(--crema-clara);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    overflow: hidden;
+  }
+
+  .condicion {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    /* Líneas de la grilla: el borde del contenedor recorta las del extremo. */
+    box-shadow:
+      1px 0 0 var(--linea),
+      0 1px 0 var(--linea);
+  }
+
+  dt {
+    font-family: var(--font-sub);
+    font-weight: 600;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 1rem;
+  }
+</style>

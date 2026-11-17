@@ -1,0 +1,135 @@
+/* ============================================================
+   Efectos de la landing. Las clases `anim` y `data-intro` las pone
+   el <head> (Base.astro) solo si la persona no pidió reducir movimiento.
+   ============================================================ */
+
+/* Estado inicial de lo que aparece animado (el script lo lleva a visible). */
+.anim .hero__nombre,
+.anim [data-hero-in],
+.anim .hero__sello,
+.anim [data-aparece] {
+  opacity: 0;
+}
+
+.anim .hero__foto--principal,
+.anim [data-revela] {
+  clip-path: inset(100% 0 0 0);
+}
+
+.anim .hero__foto--secundaria {
+  clip-path: inset(0 100% 0 0);
+}
+
+/* Letras partidas por el script */
+.palabra {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.letra {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ---------- Telón de entrada ---------- */
+.telon {
+  display: none;
+}
+
+[data-intro] .telon {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1.5rem;
+  background: var(--noche);
+  clip-path: inset(0 0 0 0);
+}
+
+[data-intro] body {
+  overflow: hidden;
+}
+
+.telon__logo {
+  width: clamp(7rem, 22vw, 11rem);
+  opacity: 0;
+}
+
+.telon__linea {
+  width: clamp(8rem, 30vw, 14rem);
+  height: 1px;
+  background: var(--crema);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ---------- Barra de progreso de la página ---------- */
+.progreso-pagina {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: 2px;
+  background: var(--noche);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* ---------- Franja de palabras ---------- */
+.franja {
+  overflow: hidden;
+  padding-block: clamp(1.25rem, 3vw, 2rem);
+  border-block: 1px solid var(--linea);
+  background: var(--crema);
+}
+
+.franja--noche {
+  background: var(--noche);
+  color: var(--crema);
+  border-color: var(--noche);
+}
+
+.franja__pista {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.franja__grupo {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding-right: clamp(1.5rem, 4vw, 3rem);
+  font-family: var(--font-titulo);
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.franja__grupo span:nth-child(4n + 3) {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
+}
+
+.franja__estrella {
+  width: 0.45em;
+  height: 0.45em;
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .franja__pista {
+    flex-wrap: wrap;
+    width: auto;
+  }
+  .franja__grupo[aria-hidden='true'] {
+    display: none;
+  }
+  .franja__grupo {
+    flex-wrap: wrap;
+    white-space: normal;
+    padding-inline: var(--gutter);
+  }
+}

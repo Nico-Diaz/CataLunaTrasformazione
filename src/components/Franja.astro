@@ -1,0 +1,39 @@
+---
+import { franja } from '../data/sitio';
+
+interface Props {
+  palabras?: readonly string[];
+  noche?: boolean;
+}
+
+const { palabras = franja, noche = false } = Astro.props;
+// Dos copias idénticas: la animación corre la mitad del ancho y vuelve a empezar sin salto.
+const grupos = [0, 1];
+---
+
+<div class:list={['franja', { 'franja--noche': noche }]} data-franja aria-hidden="true">
+  <div class="franja__pista">
+    {
+      grupos.map((g) => (
+        <div class="franja__grupo" aria-hidden={g === 1 ? 'true' : undefined}>
+          {palabras.map((p) => (
+            <>
+              <span>{p}</span>
+              <svg class="franja__estrella" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M10 0 L11.8 8.2 L20 10 L11.8 11.8 L10 20 L8.2 11.8 L0 10 L8.2 8.2 Z" fill="currentColor" />
+              </svg>
+            </>
+          ))}
+          {palabras.map((p) => (
+            <>
+              <span aria-hidden="true">{p}</span>
+              <svg class="franja__estrella" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M10 0 L11.8 8.2 L20 10 L11.8 11.8 L10 20 L8.2 11.8 L0 10 L8.2 8.2 Z" fill="currentColor" />
+              </svg>
+            </>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,244 @@
+---
+import { Image } from 'astro:assets';
+import principal from '../assets/trabajos/fucsia-volado.jpg';
+import secundaria from '../assets/trabajos/negro-organza-capa.jpg';
+import monograma from '../assets/marca/monograma-navy.png';
+import { contacto, hero } from '../data/sitio';
+---
+
+<section id="inicio" class="hero">
+  <div class="hero__inner container">
+    <div class="hero__texto">
+      <p class="label hero__rol" data-hero-in>{contacto.titulo} · {contacto.matricula}</p>
+      <h1 class="hero__nombre">Catalina <span>Luna</span></h1>
+      <p class="hero__bajada" data-hero-in>{hero.bajada}</p>
+      <p class="hero__intro" data-hero-in>{hero.texto}</p>
+      <div class="hero__acciones" data-hero-in>
+        <a class="btn btn--solido" href="#idea" data-magnetico>Contame tu idea</a>
+        <a class="btn btn--linea" href="#turnos" data-magnetico>Ver turnos libres</a>
+      </div>
+    </div>
+
+    <div class="hero__fotos">
+      <div class="hero__foto hero__foto--principal">
+        <Image
+          src={principal}
+          alt="Clienta con vestido fucsia strapless y volado asimétrico, al sol contra una pared de piedra"
+          widths={[420, 640, 900]}
+          sizes="(max-width: 860px) 80vw, 460px"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hero__foto hero__foto--secundaria">
+        <Image
+          src={secundaria}
+          alt="Clienta riendo con vestido negro corto y capa de organza"
+          widths={[240, 360, 480]}
+          sizes="(max-width: 860px) 40vw, 220px"
+          loading="eager"
+        />
+      </div>
+      <div class="hero__sello" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <defs>
+            <path id="sello-circulo" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" />
+          </defs>
+          <text>
+            <!-- textLength = circunferencia (2π·76 ≈ 477): la frase da una vuelta exacta. -->
+            <textPath href="#sello-circulo" textLength="474" lengthAdjust="spacing">HECHO A MEDIDA · FIESTA · NOVIAS ·</textPath>
+          </text>
+        </svg>
+        <img src={monograma.src} alt="" width="64" height="64" />
+      </div>
+    </div>
+  </div>
+
+  <a class="hero__bajar" href="#sobre-mi" data-hero-in>
+    <span class="label">Descubrí</span>
+    <span class="hero__bajar-linea" aria-hidden="true"></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+    padding-block: 7rem 5rem;
+    overflow: hidden;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .hero__texto {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__rol {
+    color: var(--texto-suave);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__nombre {
+    font-size: clamp(3.25rem, 9.5vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: 0;
+  }
+
+  .hero__nombre span {
+    display: block;
+    padding-left: 0.9em;
+  }
+
+  .hero__bajada {
+    margin-top: 1.75rem;
+    max-width: 26ch;
+    font-family: var(--font-sub);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .hero__intro {
+    margin-top: 1rem;
+    max-width: 44ch;
+    color: var(--texto-suave);
+  }
+
+  .hero__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  /* Composición de fotos: principal en arco, secundaria superpuesta, sello girando. */
+  .hero__fotos {
+    position: relative;
+    justify-self: end;
+    width: min(100%, 29rem);
+    aspect-ratio: 3 / 4;
+  }
+
+  .hero__foto {
+    position: absolute;
+    overflow: hidden;
+    background: var(--crema-clara);
+  }
+
+  .hero__foto :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__foto--principal {
+    inset: 0 0 0 12%;
+    border-radius: 999px 999px var(--radio) var(--radio);
+  }
+
+  .hero__foto--secundaria {
+    left: -6%;
+    bottom: -8%;
+    width: 42%;
+    aspect-ratio: 3 / 4;
+    border: 6px solid var(--crema);
+    border-radius: var(--radio);
+    box-shadow: 0 24px 50px rgba(26, 37, 53, 0.25);
+  }
+
+  .hero__sello {
+    position: absolute;
+    top: 4%;
+    right: -6%;
+    width: clamp(6.5rem, 11vw, 8.5rem);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--crema);
+    color: var(--noche);
+    box-shadow: 0 10px 30px rgba(26, 37, 53, 0.15);
+  }
+
+  .hero__sello svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: girar 22s linear infinite;
+  }
+
+  .hero__sello text {
+    font-family: var(--font-sub);
+    font-size: 17px;
+    font-weight: 600;
+    fill: currentColor;
+  }
+
+  .hero__sello img {
+    width: 34%;
+    height: auto;
+  }
+
+  .hero__bajar {
+    position: absolute;
+    left: 50%;
+    bottom: 1.5rem;
+    translate: -50% 0;
+    display: grid;
+    justify-items: center;
+    gap: 0.6rem;
+    color: var(--texto-suave);
+    text-decoration: none;
+  }
+
+  .hero__bajar-linea {
+    width: 1px;
+    height: 2.75rem;
+    background: linear-gradient(var(--noche), var(--noche)) top / 100% 40% no-repeat, var(--linea);
+    animation: bajar 2s var(--ease-out) infinite;
+  }
+
+  @keyframes girar {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes bajar {
+    from {
+      background-position: 0 -120%;
+    }
+    to {
+      background-position: 0 220%;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      min-height: auto;
+      padding-top: 6rem;
+    }
+    .hero__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hero__fotos {
+      justify-self: center;
+      width: min(82%, 22rem);
+      margin-top: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero__bajar {
+      display: none;
+    }
+  }
+</style>

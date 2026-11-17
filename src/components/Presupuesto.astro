@@ -1,0 +1,141 @@
+---
+import { anticipacion, presupuesto } from '../data/sitio';
+---
+
+<section id="presupuesto" class="seccion sobre-noche" aria-labelledby="presupuesto-titulo">
+  <div class="container">
+    <header class="seccion-head">
+      <p class="label" data-aparece>El presupuesto</p>
+      <h2 id="presupuesto-titulo" data-titulo>Qué incluye y qué no.</h2>
+      <p data-aparece>Después de la primera cita te paso un presupuesto con estos servicios.</p>
+    </header>
+
+    <div class="listas">
+      <div class="lista" data-aparece>
+        <h3>Incluye</h3>
+        <ul>
+          {
+            presupuesto.incluye.map((item) => (
+              <li>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="lista lista--no" data-aparece>
+        <h3>No incluye</h3>
+        <ul>
+          {
+            presupuesto.noIncluye.map((item) => (
+              <li>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <aside class="anticipacion" data-aparece aria-label="Anticipación recomendada">
+      <div class="anticipacion__cifras">
+        <p><span class="anticipacion__num" data-contar={anticipacion.general}>{anticipacion.general}</span> meses<br /><small>mínimo</small></p>
+        <p><span class="anticipacion__num"><span data-contar={anticipacion.novias}>{anticipacion.novias}</span>–5</span> meses<br /><small>novias</small></p>
+      </div>
+      <p class="anticipacion__texto">{anticipacion.texto}</p>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .listas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .lista {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--crema);
+  }
+
+  .lista--no {
+    border-top-color: var(--linea-sobre-noche);
+  }
+
+  .lista h3 {
+    margin-bottom: 1rem;
+  }
+
+  .lista ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .lista li {
+    display: grid;
+    grid-template-columns: 1.25rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .lista svg {
+    width: 1.25rem;
+    margin-top: 0.2rem;
+  }
+
+  .lista--no li {
+    color: var(--suave-sobre-noche);
+  }
+
+  .anticipacion {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1px solid var(--linea-sobre-noche);
+    border-radius: var(--radio);
+  }
+
+  .anticipacion__cifras {
+    display: flex;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .anticipacion__cifras p {
+    font-family: var(--font-sub);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .anticipacion__cifras small {
+    color: var(--suave-sobre-noche);
+    font-size: 0.8125rem;
+    font-weight: 400;
+  }
+
+  .anticipacion__num {
+    font-family: var(--font-titulo);
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    margin-right: 0.15em;
+  }
+
+  .anticipacion__texto {
+    font-size: 1.125rem;
+    max-width: 46ch;
+  }
+
+  @media (max-width: 720px) {
+    .listas,
+    .anticipacion {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import AdminApp from '../components/admin/AdminApp';
+---
+
+<Base title="Panel — Catalina Luna" description="Panel de administración de turnos y consultas." noindex>
+  <main id="contenido" class="admin-main">
+    <AdminApp client:only="react">
+      <p slot="fallback" class="admin-cargando" role="status">Cargando panel…</p>
+    </AdminApp>
+  </main>
+</Base>
+
+<style>
+  .admin-main {
+    min-height: 100svh;
+  }
+
+  .admin-cargando {
+    padding: 4rem 1.5rem;
+    text-align: center;
+    color: var(--texto-suave);
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/marca/logo-navy.png';
+import { sobreMi } from '../data/sitio';
+---
+
+<section id="sobre-mi" class="seccion seccion--clara sobre" aria-labelledby="sobre-titulo">
+  <div class="container sobre__inner">
+    <div class="sobre__logo" data-aparece>
+      <Image src={logo} alt="Logo de Catalina Luna" widths={[280, 420]} sizes="(max-width: 760px) 50vw, 280px" />
+    </div>
+    <div class="sobre__texto">
+      <p class="label" data-aparece>Sobre mí</p>
+      <h2 id="sobre-titulo" data-titulo>{sobreMi.titulo}</h2>
+      {sobreMi.parrafos.map((p) => <p data-aparece>{p}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sobre__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .sobre__logo {
+    justify-self: center;
+    width: min(100%, 17.5rem);
+  }
+
+  .sobre__texto {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .sobre__texto .label {
+    color: var(--texto-suave);
+  }
+
+  .sobre__texto p:not(.label) {
+    max-width: 58ch;
+    color: var(--texto-suave);
+  }
+
+  @media (max-width: 760px) {
+    .sobre__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .sobre__logo {
+      justify-self: start;
+      width: 10rem;
+    }
+  }
+</style>

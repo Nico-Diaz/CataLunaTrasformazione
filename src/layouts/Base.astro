@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Páginas privadas (dashboard): fuera de buscadores. */
+  noindex?: boolean;
+  /** Landing con animaciones (src/scripts/efectos.ts). */
+  efectos?: boolean;
+}
+
+const { title, description, noindex = false, efectos = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#1a2535" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    {
+      efectos && (
+        <script is:inline>
+          // Antes de pintar: prepara las animaciones (oculta lo que va a aparecer) y el telón de
+          // entrada la primera vez por sesión. Si el script de efectos no arranca en 3 s, se muestra todo.
+          (function () {
+            var r = document.documentElement;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            r.classList.add('anim');
+            try {
+              if (!sessionStorage.getItem('cl-intro')) r.setAttribute('data-intro', '');
+            } catch (e) {}
+            setTimeout(function () {
+              if (!r.classList.contains('anim-listo')) {
+                r.classList.remove('anim');
+                r.removeAttribute('data-intro');
+              }
+            }, 3000);
+          })();
+        </script>
+      )
+    }
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,192 @@
+---
+import { Image } from 'astro:assets';
+import ficha from '../assets/trabajos/ficha-tecnica.jpg';
+import { proceso } from '../data/sitio';
+---
+
+<section id="proceso" class="seccion" aria-labelledby="proceso-titulo">
+  <div class="container">
+    <header class="seccion-head">
+      <p class="label" data-aparece>Cómo trabajo</p>
+      <h2 id="proceso-titulo" data-titulo>De la primera idea a la entrega.</h2>
+      <p data-aparece>Cada prenda pasa por las mismas etapas. Así sabés en todo momento qué sigue.</p>
+    </header>
+
+    <div class="proceso">
+      <figure class="proceso__ficha">
+        <div class="proceso__marco" data-revela>
+          <Image
+            src={ficha}
+            alt="Ficha técnica de Trasformazione con la tabla de medidas y el figurín de frente y espalda"
+            widths={[360, 540, 720]}
+            sizes="(max-width: 860px) 80vw, 360px"
+            data-parallax="6"
+          />
+        </div>
+        <figcaption>Cada clienta tiene su ficha: medidas, figurín y el registro de cada prueba.</figcaption>
+      </figure>
+
+      <div class="pasos-linea">
+      <span class="pasos__progreso" aria-hidden="true"></span>
+      <ol class="pasos">
+        {
+          proceso.map((p, i) => (
+            <li class="paso" data-aparece>
+              <span class="paso__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div class="paso__cuerpo">
+                <h3>{p.titulo}</h3>
+                <p>{p.texto}</p>
+                {p.nota && <p class="paso__nota">{p.nota}</p>}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proceso {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .proceso__ficha {
+    position: sticky;
+    top: 6rem;
+    margin: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .proceso__marco {
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radio);
+    background: var(--crema-clara);
+  }
+
+  .proceso__marco :global(img) {
+    width: 100%;
+    height: 116%;
+    object-fit: cover;
+  }
+
+  .proceso__ficha figcaption {
+    font-size: 0.9375rem;
+    color: var(--texto-suave);
+    max-width: 34ch;
+  }
+
+  .pasos-linea {
+    position: relative;
+    padding-left: clamp(1.5rem, 3vw, 2.5rem);
+    border-left: 1px solid var(--linea);
+  }
+
+  .pasos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+  }
+
+  .pasos__progreso {
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--noche);
+    transform-origin: top;
+  }
+
+  .paso {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    padding-block: 1.75rem;
+  }
+
+  .paso + .paso {
+    border-top: 1px solid var(--linea);
+  }
+
+  /* Punto sobre la línea, que se rellena cuando el paso está activo. */
+  .paso::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * clamp(1.5rem, 3vw, 2.5rem) - 5px);
+    top: 2.1rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: 1px solid var(--noche);
+    background: var(--crema);
+    transition: background-color 300ms var(--ease-out), transform 300ms var(--ease-out);
+  }
+
+  .paso:global(.paso--activo)::before {
+    background: var(--noche);
+    transform: scale(1.4);
+  }
+
+  .paso__num {
+    padding-top: 0.2rem;
+    font-family: var(--font-sub);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    font-variant-numeric: tabular-nums;
+    color: var(--texto-suave);
+    transition: color 300ms var(--ease-out);
+  }
+
+  .paso:global(.paso--activo) .paso__num {
+    color: var(--texto);
+  }
+
+  .paso__cuerpo {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .paso__cuerpo h3 {
+    font-size: 1.25rem;
+  }
+
+  .paso__cuerpo p {
+    color: var(--texto-suave);
+    max-width: 56ch;
+  }
+
+  .paso__nota {
+    justify-self: start;
+    margin-top: 0.35rem;
+    padding: 0.6rem 0.75rem;
+    border-left: 2px solid var(--noche);
+    background: var(--crema-clara);
+    color: var(--texto) !important;
+    font-weight: 500;
+  }
+
+  @media (max-width: 860px) {
+    .proceso {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .proceso__ficha {
+      position: static;
+      width: min(100%, 22rem);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .paso {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+  }
+</style>

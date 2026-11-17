@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header';
+import Hero from '../components/Hero.astro';
+import SobreMi from '../components/SobreMi.astro';
+import Proceso from '../components/Proceso.astro';
+import Presupuesto from '../components/Presupuesto.astro';
+import Condiciones from '../components/Condiciones.astro';
+import TurnosPublicos from '../components/TurnosPublicos';
+import Trasformazione from '../components/Trasformazione.astro';
+import InspiracionForm from '../components/InspiracionForm';
+import Footer from '../components/Footer.astro';
+import Galeria from '../components/Galeria.astro';
+import Franja from '../components/Franja.astro';
+import monogramaCrema from '../assets/marca/monograma-crema.png';
+import '../styles/efectos.css';
+import { contacto, hero } from '../data/sitio';
+import { urlWhatsApp } from '../lib/whatsapp';
+---
+
+<Base title={`${contacto.nombreCorto} — Vestidos de fiesta y novia a medida`} description={`${contacto.nombre}, ${contacto.titulo.toLowerCase()}. ${hero.bajada}`} efectos>
+  <div class="telon" aria-hidden="true">
+    <img class="telon__logo" src={monogramaCrema.src} alt="" width="176" height="176" />
+    <span class="telon__linea"></span>
+  </div>
+  <div class="progreso-pagina" aria-hidden="true"></div>
+  <Header client:load />
+  <main id="contenido">
+    <Hero />
+    <Franja />
+    <SobreMi />
+    <Galeria />
+    <Proceso />
+    <Presupuesto />
+    <Condiciones />
+
+    <section id="turnos" class="seccion" aria-labelledby="turnos-titulo">
+      <div class="container">
+        <header class="seccion-head">
+          <p class="label" data-aparece>Turnos</p>
+          <h2 id="turnos-titulo" data-titulo>Mirá qué horarios tengo libres.</h2>
+          <p>
+            Son turnos para la primera cita. Elegí uno disponible y pedímelo por WhatsApp: yo lo confirmo y lo marco como
+            tomado.
+          </p>
+        </header>
+        <TurnosPublicos client:only="react">
+          <div slot="fallback" class="turnos-cargando" role="status">Cargando turnos…</div>
+        </TurnosPublicos>
+      </div>
+    </section>
+
+    <Franja noche palabras={["Contame tu idea", "Pinterest", "Fotos", "Bocetos", "Tu prenda"]} />
+    <Trasformazione />
+
+    <section id="idea" class="seccion seccion--clara" aria-labelledby="idea-titulo">
+      <div class="container idea-layout">
+        <header class="seccion-head idea-layout__head">
+          <p class="label" data-aparece>Contame tu idea</p>
+          <h2 id="idea-titulo" data-titulo>Mandame tu inspiración.</h2>
+          <p>
+            Subí fotos, pegá un tablero de Pinterest o contame qué imaginás. Armo el mensaje y lo enviás a mi WhatsApp en
+            un toque.
+          </p>
+          <p class="idea-layout__directo">
+            ¿Preferís escribir directo? <a href={urlWhatsApp()} target="_blank" rel="noopener">Abrir WhatsApp</a>
+          </p>
+        </header>
+        <InspiracionForm client:load />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import '../scripts/efectos';
+</script>
+
+<style>
+  .turnos-cargando {
+    padding: 3rem 1.5rem;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    text-align: center;
+    color: var(--texto-suave);
+    min-height: 16rem;
+    display: grid;
+    place-items: center;
+  }
+
+  .idea-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .idea-layout__head {
+    position: sticky;
+    top: 6rem;
+    margin-bottom: 0;
+  }
+
+  .idea-layout__directo {
+    font-size: 1rem !important;
+  }
+
+  @media (max-width: 860px) {
+    .idea-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .idea-layout__head {
+      position: static;
+    }
+  }
+</style>
