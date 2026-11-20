@@ -81,9 +81,14 @@ export default function Header() {
           className="site-header__toggle"
           aria-expanded={open}
           aria-controls="menu-movil"
+          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="label">{open ? 'Cerrar' : 'Menú'}</span>
+          <span className="site-header__burger" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
         </button>
       </div>
 
