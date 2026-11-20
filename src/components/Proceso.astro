@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import ficha from '../assets/trabajos/ficha-tecnica.jpg';
+import ficha from '../assets/proceso/proceso.jpg';
 import { proceso } from '../data/sitio';
 ---
 
@@ -17,9 +17,9 @@ import { proceso } from '../data/sitio';
         <div class="proceso__marco" data-revela>
           <Image
             src={ficha}
-            alt="Ficha técnica de Trasformazione con la tabla de medidas y el figurín de frente y espalda"
-            widths={[360, 540, 720]}
-            sizes="(max-width: 860px) 80vw, 360px"
+            alt="Ficha técnica de Trasformazione sobre el escritorio, con la tabla de medidas y el figurín de frente y espalda"
+            widths={[480, 720, 960]}
+            sizes="(max-width: 860px) 90vw, 420px"
             data-parallax="6"
           />
         </div>
@@ -65,7 +65,7 @@ import { proceso } from '../data/sitio';
 
   .proceso__marco {
     overflow: hidden;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 3;
     border-radius: var(--radio);
     background: var(--crema-clara);
   }

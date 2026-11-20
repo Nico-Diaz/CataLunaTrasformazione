@@ -155,11 +155,19 @@ export const clientas = [
 /** Palabras de la franja en movimiento. */
 export const franja = ['Eventos formales', 'A medida', 'Moldería', 'Pruebas', 'Trasformazione'];
 
-/** Tipos de prenda del formulario. `novia` activa la recomendación de 4 meses. */
+/**
+ * Tipos de prenda del formulario, según la línea elegida. `linea: null` aparece en las dos.
+ * `novia` activa la recomendación de 4 meses.
+ */
 export const prendas = [
-  { valor: 'Vestido para evento formal', linea: 'Catalina Luna' },
+  { valor: 'Vestido para 15', linea: 'Catalina Luna' },
   { valor: 'Vestido de novia', linea: 'Catalina Luna', novia: true },
-  { valor: 'Prenda formal', linea: 'Trasformazione' },
-  { valor: 'Prenda cotidiana', linea: 'Trasformazione' },
-  { valor: 'Otra', linea: null },
+  { valor: 'Vestido de egresada', linea: 'Catalina Luna' },
+  { valor: 'Evento formal', linea: 'Catalina Luna' },
+  { valor: 'Vestido', linea: 'Trasformazione' },
+  { valor: 'Conjunto', linea: 'Trasformazione' },
+  { valor: 'Blusa', linea: 'Trasformazione' },
+  { valor: 'Falda', linea: 'Trasformazione' },
+  { valor: 'Pantalón', linea: 'Trasformazione' },
+  { valor: 'Otro', linea: null },
 ] as const;
