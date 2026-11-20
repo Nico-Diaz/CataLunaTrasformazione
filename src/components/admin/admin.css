@@ -48,6 +48,24 @@
   cursor: pointer;
 }
 
+.acceso__volver {
+  margin-top: -0.75rem;
+  color: var(--texto-suave);
+  text-decoration: none;
+}
+
+.acceso__volver:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.panel__web {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+}
+
 .admin-cargando {
   padding: 4rem 1.5rem;
   text-align: center;
@@ -91,6 +109,7 @@
 }
 
 .panel__tab,
+.panel__web,
 .panel__salir {
   min-height: 2.75rem;
   padding: 0.4rem 0.9rem;
@@ -106,6 +125,7 @@
 }
 
 .panel__tab:hover,
+.panel__web:hover,
 .panel__salir:hover {
   color: var(--crema);
 }
@@ -120,7 +140,7 @@
     flex-wrap: wrap;
     row-gap: 0.25rem;
   }
-  .panel__salir {
+  .panel__web {
     margin-left: auto;
   }
   .panel__tabs {

@@ -26,7 +26,7 @@ type Fase =
   | { tipo: 'listo'; url: string; mensaje: string; pendientes: number };
 
 const LINEAS: { valor: Linea; titulo: string; detalle: string }[] = [
-  { valor: 'Catalina Luna', titulo: 'Catalina Luna', detalle: 'Fiesta y novias' },
+  { valor: 'Catalina Luna', titulo: 'Catalina Luna', detalle: 'Eventos formales' },
   { valor: 'Trasformazione', titulo: 'Trasformazione', detalle: 'Formal y cotidiana' },
 ];
 

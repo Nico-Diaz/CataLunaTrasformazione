@@ -18,7 +18,7 @@ export const contacto = {
 };
 
 export const hero = {
-  bajada: 'Vestidos de fiesta y de novia, diseñados y confeccionados a tu medida.',
+  bajada: 'Indumentaria para eventos formales, con diseño y confección personalizados.',
   texto:
     'Traeme tu idea, una foto o un tablero de Pinterest. Lo convertimos juntas en una prenda pensada para vos, desde la moldería hasta la última prueba.',
 };
@@ -26,7 +26,7 @@ export const hero = {
 export const sobreMi = {
   titulo: 'Diseño a medida, de principio a fin.',
   parrafos: [
-    'Soy Catalina, licenciada en diseño de indumentaria y textil. Trabajo con prendas elegantes, sobre todo de fiesta y de novia, hechas para una persona y un momento.',
+    'Soy Catalina, licenciada en diseño de indumentaria y textil. Trabajo con prendas elegantes, sobre todo para eventos formales, hechas para una persona y un momento.',
     'Me ocupo de todo el proceso: escucho la idea, tomo las medidas, hago la moldería, te acompaño a elegir los materiales y confecciono la prenda con las pruebas que hagan falta.',
   ],
 };
@@ -110,34 +110,54 @@ export const trasformazione = {
   nombre: 'Trasformazione',
   bajada: 'La línea de ropa formal y cotidiana de Catalina Luna.',
   parrafos: [
-    'Trasformazione es mi marca para prendas que se usan más allá de una fiesta: sastrería, ropa formal y piezas para el día a día, con el mismo cuidado en la moldería y la terminación.',
+    'Trasformazione es mi marca para prendas que se usan más allá de un evento formal: sastrería, ropa formal y piezas para el día a día, con el mismo cuidado en la moldería y la terminación.',
     'Se trabaja igual que un vestido a medida: primera cita, medidas, presupuesto y pruebas. La consulta va al mismo WhatsApp.',
   ],
   ejemplos: ['Sastrería y trajes', 'Camisas y blusas', 'Pantalones y faldas', 'Prendas para el día a día'],
+  /**
+   * Una pila de fotos por chica. `carpeta` es la subcarpeta de src/assets/trasformazione/
+   * (entran todas sus fotos .jpg, en orden de nombre).
+   */
+  chicas: [
+    { carpeta: 'ari', nombre: 'Ari' },
+    { carpeta: 'clari', nombre: 'Clari' },
+    { carpeta: 'sofi', nombre: 'Sofi' },
+    { carpeta: 'valentina', nombre: 'Valentina' },
+    { carpeta: 'irene', nombre: 'Irene' },
+    { carpeta: 'vicki', nombre: 'Vicki' },
+  ],
 };
 
 /**
- * Galería de trabajos. `foto` es el nombre del archivo en src/assets/trabajos/.
- * `credito` aparece debajo cuando la foto es de un fotógrafo.
+ * Clientas del carrusel. `foto` es el nombre del archivo en src/assets/clientas/ (sin .jpg);
+ * debajo de cada foto se muestra solo el nombre.
  */
-export const trabajos = [
-  { foto: 'fucsia-sol', titulo: 'Vestido fucsia', detalle: 'Strapless con volado asimétrico' },
-  { foto: 'negro-organza-espalda', titulo: 'Negro y organza', detalle: 'Espalda descubierta, capa traslúcida' },
-  { foto: 'vestido-lila', titulo: 'Vestido de quince', detalle: 'Tul lila con bordado floral', credito: 'Foto: Fabio Galván' },
-  { foto: 'fucsia-piedra', titulo: 'Fucsia, de noche', detalle: 'Drapeado y caída al bies' },
-  { foto: 'negro-organza-piedra', titulo: 'Capa de organza', detalle: 'Mangas amplias sobre vestido corto' },
-  { foto: 'conjunto-marron', titulo: 'Conjunto chocolate', detalle: 'Top asimétrico con recortes y falda' },
-  { foto: 'fucsia-volado', titulo: 'Volado al viento', detalle: 'El mismo fucsia, en movimiento' },
-  { foto: 'conjunto-negro', titulo: 'Conjunto negro', detalle: 'Top de un hombro con lazo y minifalda' },
-  { foto: 'negro-organza-capa', titulo: 'Organza al sol', detalle: 'Capa traslúcida sobre negro' },
+export const clientas = [
+  { foto: 'luli', nombre: 'Luli' },
+  { foto: 'amparo', nombre: 'Amparo' },
+  { foto: 'victoria', nombre: 'Victoria' },
+  { foto: 'josefina', nombre: 'Josefina' },
+  { foto: 'catalina', nombre: 'Catalina' },
+  { foto: 'luna', nombre: 'Luna' },
+  { foto: 'giuliana', nombre: 'Giuliana' },
+  { foto: 'leila', nombre: 'Leila' },
+  { foto: 'marcela', nombre: 'Marcela' },
+  { foto: 'ariadna', nombre: 'Ariadna' },
+  { foto: 'lourdes', nombre: 'Lourdes' },
+  { foto: 'pilar', nombre: 'Pilar' },
+  { foto: 'malena', nombre: 'Malena' },
+  { foto: 'martina', nombre: 'Martina' },
+  { foto: 'clara', nombre: 'Clara' },
+  { foto: 'sofia', nombre: 'Sofía' },
+  { foto: 'valentina', nombre: 'Valentina' },
 ] as const;
 
 /** Palabras de la franja en movimiento. */
-export const franja = ['Fiesta', 'Novias', 'A medida', 'Moldería', 'Pruebas', 'Trasformazione'];
+export const franja = ['Eventos formales', 'A medida', 'Moldería', 'Pruebas', 'Trasformazione'];
 
 /** Tipos de prenda del formulario. `novia` activa la recomendación de 4 meses. */
 export const prendas = [
-  { valor: 'Vestido de fiesta', linea: 'Catalina Luna' },
+  { valor: 'Vestido para evento formal', linea: 'Catalina Luna' },
   { valor: 'Vestido de novia', linea: 'Catalina Luna', novia: true },
   { valor: 'Prenda formal', linea: 'Trasformazione' },
   { valor: 'Prenda cotidiana', linea: 'Trasformazione' },

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import CircularGallery, { type GalleryItem } from './reactbits/CircularGallery';
 
 /**
- * Carrusel circular de trabajos (React Bits) con la estética de la marca.
+ * Carrusel circular de clientas (React Bits) con la estética de la marca.
  * En pantallas chicas se curva menos y las fotos son un poco más grandes.
  */
 export default function CarruselTrabajos({ items }: { items: GalleryItem[] }) {

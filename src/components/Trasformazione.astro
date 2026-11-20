@@ -1,42 +1,58 @@
 ---
-import { Image } from 'astro:assets';
-import etiqueta from '../assets/marca/trasformazione-etiqueta.jpg';
-import conjunto from '../assets/trabajos/conjunto-negro.jpg';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import PilaTrasformazione from './PilaTrasformazione';
 import { trasformazione } from '../data/sitio';
+
+// Una pila por chica: todas las fotos de src/assets/trasformazione/<carpeta>/ (WebP livianos de 600 px).
+const archivos = import.meta.glob<{ default: ImageMetadata }>('../assets/trasformazione/*/*.jpg', { eager: true });
+const chicas = await Promise.all(
+  trasformazione.chicas.map(async (c) => {
+    const rutas = Object.keys(archivos)
+      .filter((r) => r.startsWith(`../assets/trasformazione/${c.carpeta}/`))
+      .sort();
+    if (!rutas.length) throw new Error(`No hay fotos en src/assets/trasformazione/${c.carpeta}/`);
+    const fotos = await Promise.all(
+      rutas.map(async (r, i) => {
+        const img = await getImage({ src: archivos[r].default, width: 600, format: 'webp', quality: 78 });
+        return { src: img.src, alt: `${c.nombre} con su prenda de Trasformazione, foto ${i + 1}` };
+      }),
+    );
+    return { nombre: c.nombre, fotos };
+  }),
+);
 ---
 
 <section id="trasformazione" class="seccion sobre-noche trasf" aria-labelledby="trasf-titulo">
-  <div class="container trasf__inner">
-    <div class="trasf__texto">
-      <p class="label" data-aparece>Otra línea, el mismo oficio</p>
-      <h2 id="trasf-titulo" data-titulo>{trasformazione.nombre}</h2>
-      <p class="trasf__bajada" data-aparece>{trasformazione.bajada}</p>
-      {trasformazione.parrafos.map((p) => <p class="trasf__p" data-aparece>{p}</p>)}
-      <ul class="trasf__ejemplos" data-aparece>
-        {trasformazione.ejemplos.map((e) => <li>{e}</li>)}
-      </ul>
-      <a class="btn btn--solido" href="#idea" data-linea="Trasformazione" data-magnetico>Consultar por Trasformazione</a>
+  <div class="container">
+    <div class="trasf__intro">
+      <div class="trasf__cabeza">
+        <p class="label" data-aparece>Otra línea, el mismo oficio</p>
+        <h2 id="trasf-titulo" data-titulo>{trasformazione.nombre}</h2>
+        <p class="trasf__bajada" data-aparece>{trasformazione.bajada}</p>
+      </div>
+      <div class="trasf__texto">
+        {trasformazione.parrafos.map((p) => <p class="trasf__p" data-aparece>{p}</p>)}
+        <ul class="trasf__ejemplos" data-aparece>
+          {trasformazione.ejemplos.map((e) => <li>{e}</li>)}
+        </ul>
+        <a class="btn btn--solido" href="#idea" data-linea="Trasformazione" data-magnetico>Consultar por Trasformazione</a>
+      </div>
     </div>
 
-    <div class="trasf__fotos">
-      <div class="trasf__foto trasf__foto--a" data-revela>
-        <Image
-          src={etiqueta}
-          alt="Etiqueta colgante con el logo de Trasformazione"
-          widths={[300, 450, 600]}
-          sizes="(max-width: 860px) 45vw, 280px"
-        />
-      </div>
-      <div class="trasf__foto trasf__foto--b" data-revela>
-        <Image
-          src={conjunto}
-          alt="Clienta al sol con conjunto negro de top asimétrico y falda corta"
-          widths={[300, 450, 600]}
-          sizes="(max-width: 860px) 45vw, 280px"
-          data-parallax="5"
-        />
-      </div>
-    </div>
+    <ul class="trasf__chicas" aria-label="Clientas de Trasformazione">
+      {
+        chicas.map((c) => (
+          <li class="trasf__chica" data-aparece>
+            <div class="trasf__pila">
+              <PilaTrasformazione client:visible fotos={c.fotos} label={`Fotos de ${c.nombre}`} />
+            </div>
+            <p class="trasf__nombre">{c.nombre}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="trasf__ayuda" data-aparece>Arrastrá o tocá cada foto para ver la siguiente.</p>
   </div>
 </section>
 
@@ -48,20 +64,21 @@ import { trasformazione } from '../data/sitio';
 </script>
 
 <style>
-  .trasf__inner {
+  .trasf__intro {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
-    align-items: center;
+    gap: 1.5rem clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
   }
 
+  .trasf__cabeza,
   .trasf__texto {
     display: grid;
     gap: 1.1rem;
     justify-items: start;
   }
 
-  .trasf__texto .label {
+  .trasf__cabeza .label {
     color: var(--suave-sobre-noche);
   }
 
@@ -93,33 +110,55 @@ import { trasformazione } from '../data/sitio';
     font-size: 0.875rem;
   }
 
-  .trasf__fotos {
+  /* Una pila por chica. El abanico gira hacia la izquierda, por eso el margen extra. */
+  .trasf__chicas {
+    list-style: none;
+    margin: clamp(3.5rem, 8vw, 6rem) 0 0;
+    padding: 0;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    align-items: start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3.5rem);
   }
 
-  .trasf__foto {
-    overflow: hidden;
-    aspect-ratio: 2 / 3;
-    border-radius: var(--radio);
+  .trasf__chica {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
   }
 
-  .trasf__foto :global(img) {
-    width: 100%;
-    height: 112%;
-    object-fit: cover;
+  .trasf__pila {
+    width: min(78%, 16rem);
+    aspect-ratio: 3 / 4;
   }
 
-  .trasf__foto--b {
-    margin-top: 3rem;
-    border-radius: 999px 999px var(--radio) var(--radio);
+  .trasf__nombre {
+    font-family: var(--font-titulo);
+    font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+  }
+
+  .trasf__ayuda {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    text-align: center;
+    font-family: var(--font-sub);
+    font-size: 0.875rem;
+    color: var(--suave-sobre-noche);
   }
 
   @media (max-width: 860px) {
-    .trasf__inner {
+    .trasf__intro {
       grid-template-columns: minmax(0, 1fr);
+    }
+    .trasf__chicas {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .trasf__chicas {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .trasf__pila {
+      width: min(72%, 15rem);
     }
   }
 </style>

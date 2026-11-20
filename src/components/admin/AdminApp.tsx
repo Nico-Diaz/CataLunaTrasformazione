@@ -100,6 +100,9 @@ function Panel() {
             </button>
           ))}
         </nav>
+        <a className="panel__web" href="/" title="Abrir la página pública">
+          Ver la web <span aria-hidden="true">↗</span>
+        </a>
         <button type="button" className="panel__salir" onClick={() => sb.auth.signOut()}>
           Salir
         </button>
@@ -167,6 +170,9 @@ function Login() {
         <button type="button" className="acceso__link" onClick={olvide}>
           Olvidé mi contraseña
         </button>
+        <a className="acceso__link acceso__volver" href="/">
+          ← Volver a la web
+        </a>
       </form>
     </div>
   );

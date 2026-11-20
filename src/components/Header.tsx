@@ -3,7 +3,7 @@ import monograma from '../assets/marca/monograma-navy.png';
 import './Header.css';
 
 const LINKS = [
-  { href: '#trabajos', label: 'Trabajos' },
+  { href: '#trabajos', label: 'Clientas' },
   { href: '#proceso', label: 'Cómo trabajo' },
   { href: '#presupuesto', label: 'Presupuesto' },
   { href: '#turnos', label: 'Turnos' },

@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import principal from '../assets/trabajos/fucsia-volado.jpg';
-import secundaria from '../assets/trabajos/negro-organza-capa.jpg';
+import principal from '../assets/hero/luli.jpg';
+import secundaria from '../assets/hero/giuli.jpg';
 import monograma from '../assets/marca/monograma-navy.png';
 import { contacto, hero } from '../data/sitio';
 ---
@@ -23,7 +23,7 @@ import { contacto, hero } from '../data/sitio';
       <div class="hero__foto hero__foto--principal">
         <Image
           src={principal}
-          alt="Clienta con vestido fucsia strapless y volado asimétrico, al sol contra una pared de piedra"
+          alt="Clienta de noche con vestido largo bordó de breteles finos y tajo, en un jardín iluminado"
           widths={[420, 640, 900]}
           sizes="(max-width: 860px) 80vw, 460px"
           loading="eager"
@@ -33,7 +33,7 @@ import { contacto, hero } from '../data/sitio';
       <div class="hero__foto hero__foto--secundaria">
         <Image
           src={secundaria}
-          alt="Clienta riendo con vestido negro corto y capa de organza"
+          alt="Clienta al sol con vestido largo dorado de escote cruzado, sobre el césped"
           widths={[240, 360, 480]}
           sizes="(max-width: 860px) 40vw, 220px"
           loading="eager"
@@ -46,7 +46,7 @@ import { contacto, hero } from '../data/sitio';
           </defs>
           <text>
             <!-- textLength = circunferencia (2π·76 ≈ 477): la frase da una vuelta exacta. -->
-            <textPath href="#sello-circulo" textLength="474" lengthAdjust="spacing">HECHO A MEDIDA · FIESTA · NOVIAS ·</textPath>
+            <textPath href="#sello-circulo" textLength="474" lengthAdjust="spacing">PERSONALIZADO · EVENTOS FORMALES ·</textPath>
           </text>
         </svg>
         <img src={monograma.src} alt="" width="64" height="64" />

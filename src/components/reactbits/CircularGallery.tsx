@@ -1202,7 +1202,7 @@ const CircularGallery = ({
       style={{ color: textColor, ...style }}
       role="region"
       aria-roledescription="carousel"
-      aria-label="Galería de trabajos"
+      aria-label="Galería de clientas"
       {...rest}
     >
       <canvas ref={canvasRef} className={CLASSES.canvas} aria-hidden="true" />
