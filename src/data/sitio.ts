@@ -10,7 +10,7 @@ export const contacto = {
   /** Formato internacional sin "+" ni espacios, con el 9 de celulares argentinos. */
   whatsapp: '5492614174225',
   whatsappVisible: '+54 261 417 4225',
-  email: 'cata.luna0499@gmail.com',
+  email: 'catalinaluna.tz@gmail.com',
   ciudad: 'Mendoza, Argentina',
   horarioConsultas: 'Lunes a viernes de 9 a 20 h',
   /** Dejar en null para ocultar el enlace. */
